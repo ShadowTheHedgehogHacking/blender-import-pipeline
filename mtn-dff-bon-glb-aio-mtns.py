@@ -4,8 +4,14 @@ import os
 from DragonFF.ops import dff_importer
 from io_scene_sth_mtn import import_sth_bon, import_sth_mtn
 
+### WARNING DOES NOT YET WORK!!!!!!!!!!! ###
+### WARNING DOES NOT YET WORK!!!!!!!!!!! ###
 
-############### THIS DOES NOT WORK YET ####################################
+### WARNING DOES NOT YET WORK!!!!!!!!!!! ###
+
+### WARNING DOES NOT YET WORK!!!!!!!!!!! ###
+
+### WARNING DOES NOT YET WORK!!!!!!!!!!! ###
 
 def cleanup():
     bpy.ops.object.select_all(action='SELECT')
@@ -108,6 +114,16 @@ for mtn in mtns:
     import_sth_mtn.load(bpy.context, input_path, bake_action)
     
 output_path = os.path.join(mtn_output, "AIO_DevilDoom" + '.glb')
+
+# Activate all actions for the armature
+if bpy.context.object.animation_data:
+    for track in bpy.context.object.animation_data.nla_tracks:
+        bpy.context.object.animation_data.nla_tracks.remove(track)
+        
+# Create a new NLA track for each action
+for action in bpy.data.actions:
+    track = bpy.context.object.animation_data.nla_tracks.new()
+    track.strips.new(action.name, 0, action)
 
 bpy.ops.export_scene.gltf(
     filepath=output_path,
