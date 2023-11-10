@@ -4,9 +4,18 @@ import os
 from DragonFF.ops import dff_importer
 from io_scene_sth_mtn import import_sth_bon, import_sth_mtn
 
-dff_path = "C:\\Users\\user\\Desktop\\shad\\SHADOW_BODY.DFF"
-bon_path = "C:\\Users\\user\\Desktop\\shad\\SH.BON"
-mtn_directory = "C:\\Users\\user\\Desktop\\shad\\BODY_MTN"
+def cleanup():
+    bpy.ops.object.select_all(action='SELECT')
+    bpy.ops.object.delete()
+    for collection in bpy.data.collections:
+        bpy.context.scene.collection.children.unlink(collection)
+        bpy.data.collections.remove(collection)
+    bpy.ops.outliner.orphans_purge(do_local_ids=True, do_linked_ids=True, do_recursive=True)
+
+
+dff_path = "C:\\Users\\user\\Desktop\\_TARGET\\SHADOW_BODY.DFF"
+bon_path = "C:\\Users\\user\\Desktop\\_TARGET\\SH.BON"
+mtn_directory = "C:\\Users\\user\\Desktop\\_TARGET\\MTN"
 mtns = [f for f in os.listdir(mtn_directory) if os.path.isfile(os.path.join(mtn_directory, f))]
 
 options = {
@@ -22,7 +31,7 @@ options = {
 apply_bone_names = True
 bake_action = False
 
-#### DFF Import ###
+### DFF Import ###
 
 dff_importer.import_dff(options)
 
@@ -44,10 +53,13 @@ else:
 
 ### MTN Import ###
 
+### TODO: Since we know that batch multi-actions do not map correctly in one file, perhaps we should just redo the entire process per DFF from scratch.
+
 bpy.ops.object.select_all(action='DESELECT')
 
 def find_bon_root_armature(collection):
     for obj in collection.objects:
+            ## TODO: Find a way to find what to match to, its not necessarily going to match the filename
         if obj.name == "sh.bon":
             return obj
     return None
