@@ -55,31 +55,7 @@ bake_action = True
 
 cleanup()
 
-### Export once without any mtns
-
-base_model_export = os.path.join(dff_parent, os.path.splitext(target_dff_name)[0] + '.glb')
-
-### DFF Import ###
-
-dff_importer.import_dff(options)
-
-### BON Import ###
-
-bpy.ops.object.select_all(action='DESELECT')
-for obj in bpy.data.objects:
-    if obj.type == 'ARMATURE':
-        obj.select_set(True)
-bpy.ops.import_scene.sth_bon(filepath=bon_path, apply_bone_names=apply_bone_names)
-
-### Export mtnless model
-bpy.ops.export_scene.gltf(
-    filepath=base_model_export,
-    export_animations=False,
-    export_materials='EXPORT'
-)
-
-### Export all mtns separately
-cleanup()
+### Export all-in-one file
 
 ### DFF Import ###
 
@@ -111,19 +87,19 @@ for mtn in mtns:
             bon_root_armature.select_set(True)
             break
 
-    import_sth_mtn.load(bpy.context, input_path, bake_action)
+    import_sth_mtn.load(bpy.context, input_path, bake_action, True)
     
 output_path = os.path.join(mtn_output, "AIO_DevilDoom" + '.glb')
 
-# Activate all actions for the armature
-if bpy.context.object.animation_data:
-    for track in bpy.context.object.animation_data.nla_tracks:
-        bpy.context.object.animation_data.nla_tracks.remove(track)
-        
-# Create a new NLA track for each action
-for action in bpy.data.actions:
-    track = bpy.context.object.animation_data.nla_tracks.new()
-    track.strips.new(action.name, 0, action)
+## Activate all actions for the armature
+#if bpy.context.object.animation_data:
+#    for track in bpy.context.object.animation_data.nla_tracks:
+#        bpy.context.object.animation_data.nla_tracks.remove(track)
+#        
+## Create a new NLA track for each action
+#for action in bpy.data.actions:
+#    track = bpy.context.object.animation_data.nla_tracks.new()
+#    track.strips.new(action.name, 0, action)
 
 bpy.ops.export_scene.gltf(
     filepath=output_path,
