@@ -4,7 +4,7 @@ import os
 from DragonFF.ops import dff_importer
 from io_scene_sth_mtn import import_sth_bon, import_sth_mtn
 
-### Takes a folder full of .DFF files and saves each to their own .blend
+### Takes a folder full of .DFF files and saves each to their own .dae
 
 def cleanup():
     bpy.ops.object.select_all(action='SELECT')
@@ -26,7 +26,7 @@ bake_action = False
 
 for dff_file in dff_files:
     input_path = os.path.join(input_folder, dff_file)
-    output_path = os.path.join(output_folder, os.path.splitext(dff_file)[0] + '.blend')
+    output_path = os.path.join(output_folder, os.path.splitext(dff_file)[0] + '.dae')
     cleanup()
 
     ### DFF Import ###
