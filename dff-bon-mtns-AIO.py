@@ -1,12 +1,15 @@
-### Export all-in-one dff/bon/mtns pairings in glb; Initial working revision by Psycrow101
-### Note: Use multi-mesh branch when dealing with complex models (ex Devil Doom) -> download latest, rename the contents of the zip as "DragonFF", rezip, then import the addon.
-
-### Warning DAE does not properly export all animations currently, use GLB (default) instead.
+### Export all-in-one dff/bon/mtns pairings in glb
+### You must install DragonFF as "DragonFF.zip" and DragonFF-multi-mesh as "DragonFF_multi_mesh.zip" to avoid conflicts
+### DAE does not properly export all animations currently, use GLB (default) instead
 
 import bpy
 
+import importlib
 import os
-from DragonFF.ops import dff_importer
+#### Uncomment one of the below depending on if your model requires multi-mesh or not
+#dff_importer = importlib.import_module("DragonFF.ops.dff_importer")
+dff_importer = importlib.import_module("DragonFF_multi_mesh.ops.dff_importer")
+####
 from io_scene_sth_mtn import import_sth_mtn
 
 def cleanup():
