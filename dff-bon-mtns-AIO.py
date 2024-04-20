@@ -51,15 +51,19 @@ def convert_mtn_aio(dff_options, bon_options, mtn_options, mtns_path, output_pat
         )
     else:
         bpy.ops.wm.collada_export(filepath=output_path+".dae")
+
+
+folder_with_content = "C:\\Users\\core\\Desktop\\__TARGET\\"
+content_name = "BIGFOOTA"
     
 # TODO: Find a way to have a filepicker or something to specify paths
-dff_path = "C:\\Users\\core\\Desktop\\__TARGET\\supershadow\\SUPERSHADOW.DFF"
-bon_path = "C:\\Users\\core\\Desktop\\__TARGET\\supershadow\\SH.BON"
-mtn_directory = "C:\\Users\\core\\Desktop\\__TARGET\\supershadow\\SUPERSHADOW"
+dff_path = folder_with_content + content_name + "\\" + content_name + ".DFF"
+bon_path = folder_with_content + content_name + "\\" + content_name + ".BON"
+mtn_directory = folder_with_content + content_name + "\\" + content_name 
 mtns_path = [os.path.join(mtn_directory, f) for f in os.listdir(mtn_directory) if f.endswith('.MTN')]
 output_directory = mtn_directory + "\\out"
 os.makedirs(output_directory, exist_ok=True)
-output_path = os.path.join(output_directory, "AIO_SuperShadow")
+output_path = os.path.join(output_directory, "AIO_" + content_name)
 
 dff_options = {
     'file_name'      : dff_path,
