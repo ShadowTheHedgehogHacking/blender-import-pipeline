@@ -1,7 +1,8 @@
 import bpy
-
+import importlib
 import os
-from DragonFF.ops import dff_importer
+#dff_importer = importlib.import_module("DragonFF.ops.dff_importer")
+dff_importer = importlib.import_module("DragonFF.ops.dff_importer")
 from io_scene_sth_mtn import import_sth_bon, import_sth_mtn
 
 ### Takes a folder full of .DFF files and Exports them to .glb
@@ -18,8 +19,8 @@ def cleanup():
     bpy.ops.outliner.orphans_purge(do_local_ids=True, do_linked_ids=True, do_recursive=True)
 
 
-input_folder = "C:\\Users\\user\\Desktop\\GDT"
-output_folder = "C:\\Users\\user\\Desktop\\GDT\\out"
+input_folder = "C:\\Users\\core\\Desktop\\__TARGET\\BK"
+output_folder = "C:\\Users\\core\\Desktop\\__TARGET\\out"
 
 os.makedirs(output_folder, exist_ok=True)
 dae_files = [f for f in os.listdir(input_folder) if f.endswith('.DFF')]
@@ -37,6 +38,9 @@ for dae_file in dae_files:
     options = {
         'file_name'      : input_path,
         'image_ext'      : 'PNG',
+        'load_txd'       : False,
+        'txd_file_name'  : '',
+        'skip_mipmaps'   : False,
         'connect_bones'  : False,
         'use_mat_split'  : False,
         'remove_doubles' : False,

@@ -7,8 +7,8 @@ import bpy
 import importlib
 import os
 #### Uncomment one of the below depending on if your model requires multi-mesh or not
-#dff_importer = importlib.import_module("DragonFF.ops.dff_importer")
-dff_importer = importlib.import_module("DragonFF_multi_mesh.ops.dff_importer")
+dff_importer = importlib.import_module("DragonFF.ops.dff_importer")
+#dff_importer = importlib.import_module("DragonFF_multi_mesh.ops.dff_importer")
 ####
 from io_scene_sth_mtn import import_sth_mtn
 
@@ -54,7 +54,7 @@ def convert_mtn_aio(dff_options, bon_options, mtn_options, mtns_path, output_pat
 
 
 folder_with_content = "C:\\Users\\core\\Desktop\\__TARGET\\"
-content_name = "BIGFOOTA"
+content_name = "BKWINGLARGE"
     
 # TODO: Find a way to have a filepicker or something to specify paths
 dff_path = folder_with_content + content_name + "\\" + content_name + ".DFF"
@@ -68,6 +68,9 @@ output_path = os.path.join(output_directory, "AIO_" + content_name)
 dff_options = {
     'file_name'      : dff_path,
     'image_ext'      : 'PNG',
+    'load_txd'       : False,
+    'txd_file_name'  : '',
+    'skip_mipmaps'   : False,
     'connect_bones'  : False,
     'use_mat_split'  : False,
     'remove_doubles' : False,
