@@ -1,15 +1,18 @@
 ### Export all-in-one dff/bon/mtns pairings in glb
-### You must install DragonFF as "DragonFF.zip" and DragonFF-multi-mesh as "DragonFF_multi_mesh.zip" to avoid conflicts
+### You must install DragonFF as "DragonFF-master.zip"
 ### DAE does not properly export all animations currently, use GLB (default) instead
+##################################################################################################################
+### Mirror of last tested DragonFF: https://github.com/ShadowTheHedgehogHacking/DragonFF
+### Mirror of last tested io_scene_sth_mtn: https://github.com/ShadowTheHedgehogHacking/Blender-3D-STH-Mtn-plugin
+### Last tested DragonFF version is commit ae0f42e
+### Last tested io_scene_sth_mtn is commit 7a50fb4
+##################################################################################################################
 
 import bpy
 
 import importlib
 import os
-#### Uncomment one of the below depending on if your model requires multi-mesh or not
-dff_importer = importlib.import_module("DragonFF.ops.dff_importer")
-#dff_importer = importlib.import_module("DragonFF_multi_mesh.ops.dff_importer")
-####
+dff_importer = importlib.import_module("DragonFF-master.ops.dff_importer")
 from io_scene_sth_mtn import import_sth_mtn
 
 def cleanup():
@@ -54,7 +57,7 @@ def convert_mtn_aio(dff_options, bon_options, mtn_options, mtns_path, output_pat
 
 
 folder_with_content = "C:\\Users\\core\\Desktop\\__TARGET\\"
-content_name = "BKWINGLARGE"
+content_name = "BLACKDOOM"
     
 # TODO: Find a way to have a filepicker or something to specify paths
 dff_path = folder_with_content + content_name + "\\" + content_name + ".DFF"
@@ -69,7 +72,7 @@ dff_options = {
     'file_name'      : dff_path,
     'image_ext'      : 'PNG',
     'load_txd'       : False,
-    'txd_file_name'  : '',
+    'txd_filename'  : '',
     'skip_mipmaps'   : False,
     'connect_bones'  : False,
     'use_mat_split'  : False,
