@@ -4,8 +4,8 @@
 ##################################################################################################################
 ### Mirror of last tested DragonFF: https://github.com/ShadowTheHedgehogHacking/DragonFF
 ### Mirror of last tested io_scene_sth_mtn: https://github.com/ShadowTheHedgehogHacking/Blender-3D-STH-Mtn-plugin
-### Last tested DragonFF version is commit ae0f42e
-### Last tested io_scene_sth_mtn is commit 7a50fb4
+### Last tested DragonFF version is commit 005ffad
+### Last tested io_scene_sth_mtn is commit 711779a
 ##################################################################################################################
 
 import bpy
@@ -56,13 +56,13 @@ def convert_mtn_aio(dff_options, bon_options, mtn_options, mtns_path, output_pat
         bpy.ops.wm.collada_export(filepath=output_path+".dae")
 
 
-folder_with_content = "C:\\Users\\core\\Desktop\\__TARGET\\"
-content_name = "BLACKDOOM"
+folder_with_content = "C:\\Users\\core\\Desktop\\WEAPON_RES\\"
+content_name = "BKGUN00CORE"
     
 # TODO: Find a way to have a filepicker or something to specify paths
-dff_path = folder_with_content + content_name + "\\" + content_name + ".DFF"
-bon_path = folder_with_content + content_name + "\\" + content_name + ".BON"
-mtn_directory = folder_with_content + content_name + "\\" + content_name 
+dff_path = folder_with_content + "\\" + content_name + ".DFF"
+bon_path = folder_with_content + "\\" + content_name + ".BON"
+mtn_directory = folder_with_content + "\\" + content_name 
 mtns_path = [os.path.join(mtn_directory, f) for f in os.listdir(mtn_directory) if f.endswith('.MTN')]
 output_directory = mtn_directory + "\\out"
 os.makedirs(output_directory, exist_ok=True)
@@ -72,7 +72,8 @@ dff_options = {
     'file_name'      : dff_path,
     'image_ext'      : 'PNG',
     'load_txd'       : False,
-    'txd_filename'  : '',
+    'txd_filename'   : '',
+    'txd_pack'       : True,
     'skip_mipmaps'   : False,
     'connect_bones'  : False,
     'use_mat_split'  : False,
