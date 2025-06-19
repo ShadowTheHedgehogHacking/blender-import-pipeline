@@ -1,10 +1,9 @@
 ### Export all-in-one dff/bon/mtns pairings in glb
-### You must install DragonFF as "DragonFF-master.zip"
 ### DAE does not properly export all animations currently, use GLB (default) instead
 ##################################################################################################################
 ### Mirror of last tested DragonFF: https://github.com/ShadowTheHedgehogHacking/DragonFF
 ### Mirror of last tested io_scene_sth_mtn: https://github.com/ShadowTheHedgehogHacking/Blender-3D-STH-Mtn-plugin
-### Last tested DragonFF version is commit 29ef4e1
+### Last tested DragonFF version is commit f378813
 ### Last tested io_scene_sth_mtn is commit 711779a
 ##################################################################################################################
 
@@ -12,7 +11,16 @@ import bpy
 
 import importlib
 import os
-dff_importer = importlib.import_module("DragonFF-master.ops.dff_importer")
+
+
+## READ THIS | IMPORTANT
+# If you installed DragonFF through "Get Extensions", use this line
+# from bl_ext.blender_org.dragonff.ops import dff_importer
+
+# If you installed DragonFF zip file directly, comment out the above line and uncomment the below line
+from bl_ext.user_default.dragonff.ops import dff_importer
+## END IMPORTANT
+
 from io_scene_sth_mtn import import_sth_mtn
 
 def cleanup():
@@ -56,8 +64,8 @@ def convert_mtn_aio(dff_options, bon_options, mtn_options, mtns_path, output_pat
         bpy.ops.wm.collada_export(filepath=output_path+".dae")
 
 
-folder_with_content = "C:\\Users\\core\\Desktop\\__TARGET"
-content_name = "BKGUN00CORE"
+folder_with_content = "C:\\Users\\core\\Desktop\\EXTRACTED_GAME\\files\\character\\shadow\\MODEL"
+content_name = "SHADOW_BODY"
     
 # TODO: Find a way to have a filepicker or something to specify paths
 dff_path = folder_with_content + "\\" + content_name + "\\" + content_name + ".DFF"
@@ -79,6 +87,7 @@ dff_options = {
     'use_mat_split'  : False,
     'remove_doubles' : False,
     'group_materials': False,
+    'materials_naming': True,
     'import_normals' : True
 }
 
